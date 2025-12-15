@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkouts Chart</title>
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<h1>Active Checkouts By Equipment Type</h1>
+
+<div class="chart-container">
+    <canvas id="myBarChart"></canvas>
+</div>
+
+<script>
+    window.chartLabels = JSON.parse('{{ labels|safe }}');
+    window.chartData   = JSON.parse('{{ data|safe }}');
+</script>
+
+<script src="{% static 'app.js' %}"></script>
+
+</body>
+</html>

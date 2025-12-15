@@ -1,0 +1,10 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background: #fafafa;
+}
+
+.chart-container {
+    width: 600px;
+    margin-bottom: 40px;
+}

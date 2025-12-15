@@ -6,18 +6,31 @@
 <body>
     <h1>Checkout</h1>
 
-    <form method="post">
-        {% csrf_token %}
+        {% if equipment %}
+            <form method="post">
+                {% csrf_token %}
 
-        <p>Equipment Name:<br><input name="equipmentName"></p>
-        <p>Equipment Serial Number:<br><input name="equipmentSerialNumber"></p>
-        <p>Borrower Name:<br><input name="borrowerName"></p>
-        <p>Borrower Email:<br><input name="borrowerEmail"></p>
+                <p>
+                    Select Equipment:<br>
+                    <select name="equipmentSerialNumber">
+                        {% for e in equipment %}
+                            <option value="{{ e.serialNumber }}">
+                                {{ e.name }} ({{ e.serialNumber }})
+                            </option>
+                        {% endfor %}
+                    </select>
+                </p>
 
-        <p>Checkout Date:<br><input type="date" name="checkoutDate"></p>
-        <p>Due Date:<br><input type="date" name="dueDate"></p>
+                <p>Borrower Name:<br><input name="borrowerName"></p>
+                <p>Borrower Email:<br><input name="borrowerEmail"></p>
+                <p>Checkout Date:<br><input type="date" name="checkoutDate"></p>
+                <p>Due Date:<br><input type="date" name="dueDate"></p>
 
-        <button type="submit">Submit</button>
-    </form>
+                <button type="submit">Submit</button>
+            </form>
+        {% else %}
+            <p>No equipment available for checkout.</p>
+        {% endif %}
+
 </body>
 </html>

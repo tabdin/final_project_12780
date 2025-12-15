@@ -47,6 +47,19 @@ class Checkout(models.Model):
     checkoutDate = models.DateField()
     dueDate = models.DateField()
     returned = models.BooleanField(default=False)
+    equipmentType = models.CharField(
+    max_length=50,
+    choices=[
+        ("scope", "Oscilloscope"),
+        ("mcu", "Microcontroller"),
+        ("sensor", "Sensor"),
+        ("psu", "Power Supply"),
+        ("fpga", "Field Programmable Gate Array"),
+        ("other", "Other"),
+        ],
+        default="other",
+    )
 
+    
     def __str__(self):
         return f"{self.borrowerName}: {self.equipmentName}"
