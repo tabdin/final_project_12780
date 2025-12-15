@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Return</title>
+</head>
+<body>
+    <h1>Return</h1>
+
+    {% if active_checkouts %}
+        <form method="post">
+            {% csrf_token %}
+            <select name="checkout_id">
+                {% for c in active_checkouts %}
+                    <option value="{{c.id}}">
+                        {{ c.borrowerName }} {{ c.equipmentName }}
+                    </option>
+                {% endfor %}
+            </select>
+            <button type="submit">Return</button>
+        </form>
+    {% else %}
+        <p>No active checkouts</p>
+    {% endif %}
+</body>
+</html>

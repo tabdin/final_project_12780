@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+</head>
+<body>
+    <h1>Checkout</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <p>Equipment Name:<br><input name="equipmentName"></p>
+        <p>Equipment Serial Number:<br><input name="equipmentSerialNumber"></p>
+        <p>Borrower Name:<br><input name="borrowerName"></p>
+        <p>Borrower Email:<br><input name="borrowerEmail"></p>
+
+        <p>Checkout Date:<br><input type="date" name="checkoutDate"></p>
+        <p>Due Date:<br><input type="date" name="dueDate"></p>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
