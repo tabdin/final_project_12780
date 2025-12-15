@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from .models import Equipment, Checkout
 import json
+import pandas as pd
 # Create your views here.
 # Follows view structure from helloworld/pittrain/views.py
 
@@ -107,3 +108,33 @@ def checkouts_chart(request):
         "labels": json.dumps(labels),
         "data": json.dumps(data),
     })
+
+def export_checkouts_xlsx(request):
+    # Get checkout data
+    checkouts = Checkout.objects.all().values(
+        "id",
+        "dateAdded",
+        "equipmentName",
+        "equipmentSerialNumber",
+        "equipmentType",
+        "borrowerName",
+        "borrowerEmail",
+        "checkoutDate",
+        "dueDate",
+        "returned",
+    )
+
+    # Convert to DataFrame
+    df = pd.DataFrame(list(checkouts))
+
+    # Create HTTP response
+    # https://stackoverflow.com/questions/2937465/what-is-correct-content-type-for-excel-files
+    response = HttpResponse(
+        content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+    response["Content-Disposition"] = 'attachment; filename="checkouts.xlsx"'
+
+    # Write Excel file to response
+    df.to_excel(response, index=False)
+
+    return response
