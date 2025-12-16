@@ -1,4 +1,4 @@
-# Lab Equipment Tracking Application
+# Lab Equipment Tracking Application Final
 
 ## Overview
 This project is a Django-based lab equipment tracking application designed for CMU/ECE-style courses to manage shared hardware such as oscilloscopes, microcontrollers, sensors, and other lab equipment.
